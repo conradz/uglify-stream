@@ -19,7 +19,7 @@ Note: UglifyJS is run in a separate process when using this module, which means
 that it will not block the calling process when compressing, unlike when Uglify
 is called directly from Node.
 
-## Use with Browserify
+## Example: compress browserify bundle
 
 Using a transform stream makes it very simple to compress the bundle output
 from [Browserify](https://github.com/substack/node-browserify):
