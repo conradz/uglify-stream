@@ -2,6 +2,8 @@
 
 Transform stream for UglifyJS
 
+To install this module run `npm install --save uglify-stream`.
+
 Creates a stream that will compress all JS code piped into it with UglifyJS.
 
 ```js
