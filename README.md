@@ -1,5 +1,7 @@
 # uglify-stream
 
+[![Build Status](https://travis-ci.org/conradz/uglify-stream.svg)](https://travis-ci.org/conradz/uglify-stream)
+
 Transform stream for UglifyJS
 
 To install this module run `npm install --save uglify-stream`.
