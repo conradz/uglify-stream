@@ -1,0 +1,35 @@
+{
+  "name": "uglify-stream",
+  "version": "1.0.0",
+  "description": "Transform stream for UglifyJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/conradz/uglify-stream.git"
+  },
+  "keywords": [
+    "uglify",
+    "stream",
+    "streaming",
+    "uglifyjs",
+    "compress",
+    "minify"
+  ],
+  "author": "Conrad Zimmerman <me@conradz.com>",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/conradz/uglify-stream/issues"
+  },
+  "homepage": "https://github.com/conradz/uglify-stream",
+  "dependencies": {
+    "duplexify": "^3.0.1",
+    "uglify-js": "^2.4.15"
+  },
+  "devDependencies": {
+    "bl": "^0.9.0",
+    "tap": "^0.4.12"
+  }
+}
