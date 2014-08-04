@@ -1,7 +1,7 @@
 # uglify-stream
 
 [![NPM](http://img.shields.io/npm/v/uglify-stream.svg)](https://npmjs.org/packages/uglify-stream)
-[![Build Status](http://img.shields.io/travis/joyent/node.svg)](https://travis-ci.org/conradz/uglify-stream)
+[![Build Status](http://img.shields.io/travis/conradz/uglify-stream.svg)](https://travis-ci.org/conradz/uglify-stream)
 
 Transform stream for UglifyJS
 
