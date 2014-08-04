@@ -8,6 +8,8 @@ To install this module run `npm install --save uglify-stream`.
 
 Creates a stream that will compress all JS code piped into it with UglifyJS.
 
+## Example
+
 ```js
 var fs = require('fs');
 var uglify = require('uglify-stream');
@@ -16,6 +18,17 @@ fs.createReadStream('input.js')
     .pipe(uglify())
     .pipe(fs.createWriteStream('output.js'));
 ```
+
+## API
+
+```js
+uglify-stream([opts])
+```
+
+### Options
+
+ * `compress`: Set to `false` to disable compression
+ * `mangle`: Set to `false` to disable name mangling
 
 Note: UglifyJS is run in a separate process when using this module, which means
 that it will not block the calling process when compressing, unlike when Uglify
