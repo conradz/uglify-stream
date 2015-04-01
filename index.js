@@ -12,7 +12,7 @@ function uglify(opts) {
         args.push('-c');
     if (opts.mangle !== false)
         args.push('-m');
-    args.push('-');
+    args.push('--');
 
     var proc = spawn(process.execPath, args, { stdio: 'pipe' });
     return duplexify(proc.stdin, proc.stdout);
