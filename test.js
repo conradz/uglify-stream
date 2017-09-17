@@ -49,3 +49,22 @@ test('emits errors', function(t) {
         t.end();
     }
 });
+
+test('custom uglify-js module', function(t) {
+    var src = [
+        'const fn = (...args) => {',
+        '  return args.map(x => x ** 2);',
+        '};'
+    ].join('\n');
+
+    var stream = uglify({ uglify: require('uglify-es') });
+    stream.pipe(bl(done));
+    stream.end(src);
+
+    function done(err, result) {
+        t.notOk(err);
+        result = result.toString();
+        t.notEqual(result, src);
+        t.end();
+    }
+});
