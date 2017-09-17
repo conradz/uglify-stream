@@ -30,3 +30,22 @@ test('compress js code', function(t) {
         t.end();
     }
 });
+
+test('emits errors', function(t) {
+    var src = [
+        '(function() {',
+        '  syntax error;',
+        '})();'
+    ].join('\n');
+
+    var stream = uglify();
+    stream.pipe(bl(done));
+    stream.end(src);
+
+    function done(err, result) {
+        t.ok(err);
+        t.ok(/Unexpected token: name/.test(err.message));
+        t.notOk(result);
+        t.end();
+    }
+});

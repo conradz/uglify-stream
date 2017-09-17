@@ -14,6 +14,10 @@ function uglifyStream(opts) {
 
     var writer = concat({ encoding: 'string' }, function (source) {
         var minified = uglify.minify(source, opts);
+        if(minified.error) {
+            stream.emit('error', minified.error);
+            return;
+        }
         var reader = fromString(minified.code);
         stream.setReadable(reader);
     });
