@@ -19,18 +19,21 @@ fs.createReadStream('input.js')
 ## API
 
 ```js
-uglify-stream([opts])
+uglifyStream([opts])
 ```
 
 Creates a duplex stream that will compress all JS code piped into it with
-UglifyJS. UglifyJS is run in a separate process when using this module, which
-means that it will not block the calling process when compressing, unlike using
-Uglify directly from Node.
+UglifyJS.
 
 ### Options
 
  * `compress`: Set to `false` to disable compression
  * `mangle`: Set to `false` to disable name mangling
+ * `uglify`: Pass in an `uglify-js` module with a `minify()` function.
+   By default, `uglify-js@3` is used.
+   With this option you can use `uglify-es` instead.
+
+All uglify-js options are supported, see [its documentation](https://github.com/mishoo/UglifyJS2#minify-options).
 
 ## Example: compress browserify bundle
 
@@ -45,6 +48,26 @@ var bl = require('bl');
 var b = browserify('my-file.js')
     .bundle()
     .pipe(uglify())
+    .pipe(bl(done));
+
+function done(err, src) {
+    console.log(src.toString());
+}
+```
+
+## Example: Minifying ES2015+ code
+
+```js
+var fromString = require('from2-string');
+var uglify = require('uglify-stream');
+var bl = require('bl');
+
+fromString(`
+  const fn = (...args) => {
+    return args.map(x => x ** 2);
+  };
+`)
+    .pipe(uglify({ uglify: require('uglify-es') }))
     .pipe(bl(done));
 
 function done(err, src) {
