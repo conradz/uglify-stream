@@ -1,19 +1,24 @@
 var duplexify = require('duplexify');
-var spawn = require('child_process').spawn;
-var binPath = require.resolve('uglify-js/bin/uglifyjs');
+var concat = require('concat-stream');
+var fromString = require('from2-string');
+var defaultUglify = require('uglify-js')
 
-module.exports = uglify;
+module.exports = uglifyStream;
 
-function uglify(opts) {
+function uglifyStream(opts) {
     opts = opts || {};
+    var uglify = opts.uglify || defaultUglify;
+    delete opts.uglify;
 
-    var args = [binPath];
-    if (opts.compress !== false)
-        args.push('-c');
-    if (opts.mangle !== false)
-        args.push('-m');
-    args.push('-');
+    var stream = duplexify();
 
-    var proc = spawn(process.execPath, args, { stdio: 'pipe' });
-    return duplexify(proc.stdin, proc.stdout);
+    var writer = concat({ encoding: 'string' }, function (source) {
+        var minified = uglify.minify(source, opts);
+        var reader = fromString(minified.code);
+        stream.setReadable(reader);
+    });
+
+    stream.setWritable(writer);
+
+    return stream;
 }
